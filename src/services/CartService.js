@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Crear la instancia de axios con la configuración por defecto
 const cartService = axios.create({
-  baseURL: 'http://localhost:3000',  // Aquí puedes configurar la URL base de tu API
+  baseURL: 'http://ld-produccion-557541709.us-east-1.elb.amazonaws.com:3000',  // Aquí puedes configurar la URL base de tu API
   headers: {
     'Content-Type': 'application/json',
   },

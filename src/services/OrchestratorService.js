@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Crear una instancia de axios para el orquestador
 const orchestratorService = axios.create({
-  baseURL: 'http://localhost:4000',  // Asegúrate de que coincida con la configuración de tu API
+  baseURL: 'http://ld-produccion-557541709.us-east-1.elb.amazonaws.com:4000',  // Asegúrate de que coincida con la configuración de tu API
   headers: {
     'Content-Type': 'application/json',
   },

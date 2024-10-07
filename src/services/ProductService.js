@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8081/api';
+const API_URL = 'http://ld-produccion-557541709.us-east-1.elb.amazonaws.com/api';
 
 // Servicio de productos
 const ProductService = {

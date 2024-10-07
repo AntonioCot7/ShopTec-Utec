@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const adminService = axios.create({
-  baseURL: 'http://localhost:5000',
+  baseURL: 'http://ld-produccion-557541709.us-east-1.elb.amazonaws.com:5000',
   headers: {
     'Content-Type': 'application/json',
   },

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = 'http://ld-produccion-557541709.us-east-1.elb.amazonaws.com:8000';
 
 // Servicio de Pedido, Dirección de Envío y Usuario
 const OrderService = {
