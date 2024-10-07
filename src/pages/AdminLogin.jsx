@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { loginAdmin } from '../services/AdminService'; // Importa la función de login del servicio
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const navigate = useNavigate();
 
-  const handleAdminLogin = (e) => {
+  const handleAdminLogin = async (e) => {
     e.preventDefault();
-    if (email === 'admin@shoptec.com' && password === 'admin123') {
-      alert('Iniciaste sesión como Administrador');
-    } else {
-      alert('Credenciales inválidas');
+    try {
+      // Llamada a la API para el inicio de sesión del administrador
+      await loginAdmin(email, password);
+      // Si es exitoso, redirige al dashboard del administrador
+      navigate('/admin-dashboard');
+    } catch (error) {
+      // Si hay un error, mostrar un mensaje de error
+      setErrorMessage('Credenciales inválidas. Por favor, inténtalo nuevamente.');
     }
   };
 
@@ -17,6 +25,11 @@ const AdminLogin = () => {
     <div className="flex items-center justify-center min-h-screen w-full bg-gradient-to-br from-gray-300 to-gray-500">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h1 className="text-3xl font-bold text-center mb-6">Iniciar Sesión Administrador</h1>
+        {errorMessage && (
+          <div className="bg-red-200 text-red-700 p-2 rounded mb-4 text-center">
+            {errorMessage}
+          </div>
+        )}
         <form onSubmit={handleAdminLogin} className="space-y-4">
           <div>
             <label className="block text-gray-700">Correo Electrónico</label>

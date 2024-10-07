@@ -24,7 +24,7 @@ const MainNavbar = () => {
             Todas las categorías
           </button>
           {showCategories && (
-            <div className="absolute bg-white shadow-lg mt-2 p-4 w-96">
+            <div className="absolute bg-white shadow-lg mt-2 p-4 w-96 z-50"> {/* Agregado z-50 */}
               <ul className="grid grid-cols-2 gap-4">
                 <li><Link to="/" className="hover:text-purple-600">Celulares</Link></li>
                 <li><Link to="/" className="hover:text-purple-600">Computadoras y Tablets</Link></li>
