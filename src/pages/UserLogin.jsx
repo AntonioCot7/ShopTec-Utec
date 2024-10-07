@@ -1,19 +1,38 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import OrderService from '../services/OrderService';
 
 const UserLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    alert(`Iniciaste sesión como: ${email}`);
+    try {
+      // Intentar iniciar sesión con el email proporcionado
+      await loginUsuario({ email, password });
+
+      // Obtener los detalles del usuario por email
+      const usuario = await getUsuarioByEmail(email);
+      if (usuario) {
+        alert(`Iniciaste sesión correctamente. Tu ID de usuario es: ${usuario.idUsuario}`);
+        // Redirigir al dashboard o a la página principal
+        navigate('/');
+      } else {
+        setError('Usuario no encontrado');
+      }
+    } catch (error) {
+      setError('Error al iniciar sesión. Inténtalo de nuevo.');
+    }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen w-full bg-gradient-to-br from-blue-400 to-purple-500">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
         <h1 className="text-3xl font-bold text-center mb-6">Iniciar Sesión Usuario</h1>
+        {error && <p className="text-red-500">{error}</p>}
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
             <label className="block text-gray-700">Correo Electrónico</label>
@@ -42,6 +61,7 @@ const UserLogin = () => {
             Iniciar Sesión
           </button>
         </form>
+        {/* Sección para redirigir a la página de registro */}
         <div className="text-center mt-4">
           <p className="text-gray-600">¿No tienes una cuenta?</p>
           <Link
