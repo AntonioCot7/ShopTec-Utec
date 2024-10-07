@@ -15,7 +15,6 @@ const ProductService = {
     }
   },
 
-  // Obtener todos los productos con paginación
   getAllProducts: async (page, size) => {
     try {
       const response = await axios.get(`${API_URL}/producto/all`, {
