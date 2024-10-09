@@ -4,9 +4,8 @@ import CrearCategoria from '../components/CrearCategoria';
 import { useParams } from 'react-router-dom';
 
 const AdminDashboard = () => {
-  const [view, setView] = useState('');  // 'producto' or 'categoria'
+  const [view, setView] = useState('');  
 
-  // Obtener el ID del administrador desde los parámetros de la URL
   const { id } = useParams();
   console.log("ID del Administrador:", id);
 
