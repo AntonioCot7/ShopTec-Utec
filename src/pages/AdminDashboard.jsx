@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import CrearProducto from '../components/CrearProducto';
 import CrearCategoria from '../components/CrearCategoria';
+import { useParams } from 'react-router-dom';
 
 const AdminDashboard = () => {
   const [view, setView] = useState('');  // 'producto' or 'categoria'
+
+  // Obtener el ID del administrador desde los parámetros de la URL
+  const { id } = useParams();
+  console.log("ID del Administrador:", id);
 
   return (
     <div className="flex items-center justify-center min-h-screen w-full bg-gradient-to-br from-gray-300 to-gray-500">

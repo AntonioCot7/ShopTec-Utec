@@ -7,19 +7,24 @@ const AdminLogin = () => {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
-
   const handleAdminLogin = async (e) => {
     e.preventDefault();
+    console.log("Email:", email);
+    console.log("Password:", password);
+  
     try {
-      // Llamada a la API para el inicio de sesión del administrador
-      await loginAdmin(email, password);
-      // Si es exitoso, redirige al dashboard del administrador
-      navigate('/admin-dashboard');
+      const response = await loginAdmin(email, password);
+      console.log("Respuesta del servidor:");  
+      if (response) {
+        const id = response.id; 
+        navigate(`/admin-dashboard/${id}`); 
+      }
     } catch (error) {
-      // Si hay un error, mostrar un mensaje de error
+      console.error("Error al iniciar sesión:", error.response ? error.response.data : error.message);
       setErrorMessage('Credenciales inválidas. Por favor, inténtalo nuevamente.');
     }
   };
+  
 
   return (
     <div className="flex items-center justify-center min-h-screen w-full bg-gradient-to-br from-gray-300 to-gray-500">

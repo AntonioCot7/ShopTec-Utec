@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Crear una instancia de axios para el orquestador
 const orchestratorService = axios.create({
-  baseURL: 'http://ld-produccion-557541709.us-east-1.elb.amazonaws.com:4000',  // Asegúrate de que coincida con la configuración de tu API
+  baseURL: 'http://ldservidor-2021035466.us-east-1.elb.amazonaws.com:4000',  // Asegúrate de que coincida con la configuración de tu API
   headers: {
     'Content-Type': 'application/json',
   },
@@ -22,6 +22,7 @@ export const getWelcomeMessage = async () => {
 // POST: Crear una nueva categoría
 export const createCategory = async (categoryData) => {
   try {
+    console.log("datos",categoryData )
     const response = await orchestratorService.post('/api/orquestador/categorias', categoryData);
     return response.data;
   } catch (error) {

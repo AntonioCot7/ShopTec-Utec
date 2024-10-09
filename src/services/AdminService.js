@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const adminService = axios.create({
-  baseURL: 'http://ld-produccion-557541709.us-east-1.elb.amazonaws.com:5000',
+  baseURL: 'http://ldservidor-2021035466.us-east-1.elb.amazonaws.com:5000',
   headers: {
     'Content-Type': 'application/json',
   },
@@ -65,12 +65,26 @@ export const deleteAdmin = async (id) => {
 // Iniciar sesión como administrador
 export const loginAdmin = async (email, password) => {
   try {
-    const response = await adminService.post('/admin/login', { email, password });
+    const response = await axios.post('http://ldservidor-2021035466.us-east-1.elb.amazonaws.com:5000/admin/login', { email, password }, {
+      headers: { 'Content-Type': 'application/json' },
+    });
     return response.data;
-  } catch (error) {
-    console.error('Error en loginAdmin:', error);
-    throw error;
+  }  catch (error) {
+    if (error.response) {
+      // El servidor respondió con un código de estado fuera del rango 2xx
+      console.error('Error en loginAdmin:', error.response.data);
+      throw new Error(error.response.data.message || 'Error en la autenticación');
+    } else if (error.request) {
+      // La solicitud fue hecha pero no se recibió ninguna respuesta
+      console.error('Error en loginAdmin: No se recibió respuesta del servidor', error.request);
+      throw new Error('No se recibió respuesta del servidor');
+    } else {
+      // Algo sucedió al configurar la solicitud
+      console.error('Error en loginAdmin: Error al configurar la solicitud', error.message);
+      throw new Error('Error al configurar la solicitud');
+    }
   }
 };
+
 
 export default adminService;

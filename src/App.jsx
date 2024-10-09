@@ -16,7 +16,7 @@ const App = () => {
         <Route path="/login" element={<> <Navbar /> <UserLogin /> </>} />
         <Route path="/register" element={<> <Navbar /> <Register /> </>} />
         <Route path="/admin" element={<> <Navbar /> <AdminLogin /> </>} />
-        <Route path="/admin-dashboard" element={<> <Navbar /> <AdminDashboard /> </>} /> {/* Nueva ruta */}
+        <Route path="/admin-dashboard/:id" element={<> <Navbar /> <AdminDashboard /> </>} /> {/* Nueva ruta */}
       </Routes>
     </Router>
   );
